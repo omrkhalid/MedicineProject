@@ -1,0 +1,24 @@
+﻿@page
+@model MedicineProject.Pages.Admin.Departments.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Departments</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments[0].Doctor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>

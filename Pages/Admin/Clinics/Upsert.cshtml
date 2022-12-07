@@ -1,0 +1,74 @@
+﻿@page
+@model MedicineProject.Pages.Admin.Clinics.UpsertModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Clinic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="Clinics.Id"hidden />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row pb-2">
+                <div class="col-9">
+                    <h2 class="text-primary pl-3">
+                        @(Model.Clinics.Id != 0 ? "Update" : "Create") Clinic
+                    </h2>
+                    <hr />
+                    <div class="mb-3">
+                        <label asp-for="Clinics.Name" class="control-label"></label>
+                        <input asp-for="Clinics.Name" class="form-control" />
+                        <span asp-validation-for="Clinics.Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Clinics.Description" class="control-label"></label>
+                        <input asp-for="Clinics.Description" class="form-control" />
+                        <span asp-validation-for="Clinics.Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Clinics.Image" class="control-label"></label>
+                        <input type="file" name="files" id="uploadBox" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Clinics.Price" class="control-label"></label>
+                        <input asp-for="Clinics.Price" class="form-control" />
+                        <span asp-validation-for="Clinics.Price" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Clinics.DoctorId" class="control-label"></label>
+                        <select asp-for="Clinics.DoctorId" asp-items="Model.DoctorList" class="form-select">
+                            <option disabled selected>-Select Doctor-</option>
+                        </select>
+                        <span asp-validation-for="Clinics.DoctorId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Clinics.CustomerId" class="control-label"></label>
+                        <select asp-for="Clinics.CustomerId" asp-items="Model.CustomerList" class="form-select">
+                            <option disabled selected>-Select Customer-</option>
+                        </select>
+                        <span asp-validation-for="Clinics.CustomerId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    @if(Model.Clinics.Id != 0)
+                    {
+                        <img src="@Model.Clinics.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9"/>
+                    }
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" value="Create" class="btn btn-primary" style="width:150px;" /> @(Model.Clinics.Id != 0 ? "Update" : "Create") Clinic</button>
+                <a asp-page="Index" class="btn btn-secondary" style="width:150px;">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
