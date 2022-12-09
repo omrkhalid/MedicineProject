@@ -51,6 +51,7 @@ namespace MedicineProject.Pages.Doctors
 
             _unitOfWork.Doctor.Update(Doctor);
             _unitOfWork.Save();
+            TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");
         }
     }

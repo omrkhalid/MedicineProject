@@ -38,6 +38,7 @@ namespace MedicineProject.Pages.Admin.Customers
 
             _unitOfWork.Customer.Add(Customers);
             _unitOfWork.Save();
+            TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");
         }
     }

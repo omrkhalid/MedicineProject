@@ -46,14 +46,14 @@ namespace MedicineProject.Pages.Admin.Clinics
             });
         }
 
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost()
         {
             string webRootPath = _hostEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
-            if(Clinics.Id == 0)
+            if (Clinics.Id == 0)
             {
                 //create
                 string fileName_new = Guid.NewGuid().ToString();
@@ -63,7 +63,7 @@ namespace MedicineProject.Pages.Admin.Clinics
                 {
                     files[0].CopyTo(fileStream);
                 }
-                Clinics.Image = @"images\clinics\" + fileName_new + extension;
+                Clinics.Image = @"\images\clinics\" + fileName_new + extension;
                 _unitOfWork.Clinic.Add(Clinics);
                 _unitOfWork.Save();
             }
@@ -76,9 +76,9 @@ namespace MedicineProject.Pages.Admin.Clinics
                     string fileName_new = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(webRootPath, @"images\clinics");
                     var extension = Path.GetExtension(files[0].FileName);
-                    
+
                     //delet the old image
-                    var oldImagePath = Path.Combine(webRootPath, objFromDb.Image);
+                    var oldImagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
                     if (System.IO.File.Exists(oldImagePath))
                     {
                         System.IO.File.Delete(oldImagePath);
@@ -90,7 +90,7 @@ namespace MedicineProject.Pages.Admin.Clinics
                     }
                     Clinics.Image = @"\images\clinics\" + fileName_new + extension;
                 }
-                else 
+                else
                 {
                     Clinics.Image = objFromDb.Image;
                 }

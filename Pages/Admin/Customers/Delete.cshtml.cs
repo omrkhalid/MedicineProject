@@ -34,6 +34,7 @@ namespace MedicineProject.Pages.Admin.Customers
             {
                 _unitOfWork.Customer.Remove(customer);
                 _unitOfWork.Save();
+                TempData["success"] = "sucessfully";
                 return RedirectToPage("./Index");
             }
             return Page();
