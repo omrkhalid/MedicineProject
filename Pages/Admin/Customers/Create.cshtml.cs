@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,18 +25,18 @@ namespace MedicineProject.Pages.Admin.Customers
         }
 
         [BindProperty]
-        public Customer Customers { get; set; }
-
+        public Customer Customer { get; set; }
+        
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+          if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _unitOfWork.Customer.Add(Customers);
+            _unitOfWork.Customer.Add(Customer);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

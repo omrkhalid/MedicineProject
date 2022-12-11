@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +20,14 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
 
-        public IList<Customer> Customers { get; set; }
+        public IList<Customer> Customer { get;set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Customers = _unitOfWork.Customer.GetAll();
+            if (_unitOfWork.Customer != null)
+            {
+                Customer = _unitOfWork.Customer.GetAll();
+            }
         }
     }
 }

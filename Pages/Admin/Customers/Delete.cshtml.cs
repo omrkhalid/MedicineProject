@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,19 +20,19 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
         [BindProperty]
-        public Customer Customers { get; set; }
+      public Customer Customer { get; set; }
 
         public void OnGet(int id)
         {
-            Customers = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
+            Customer = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var customer = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == Customers.Id);
-            if (customer != null)
+            var doctor = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == Customer.Id);
+            if (doctor != null)
             {
-                _unitOfWork.Customer.Remove(customer);
+                _unitOfWork.Customer.Remove(Customer);
                 _unitOfWork.Save();
                 TempData["success"] = "sucessfully";
                 return RedirectToPage("./Index");

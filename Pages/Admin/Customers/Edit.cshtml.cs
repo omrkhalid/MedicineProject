@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace MedicineProject.Pages.Admin.Customers
         }
 
         [BindProperty]
-        public Customer Customers { get; set; } = default!;
+        public Customer Customer { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,12 +31,12 @@ namespace MedicineProject.Pages.Admin.Customers
                 return NotFound();
             }
 
-            var customer = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
+            var customer =  _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
             }
-            Customers = customer;
+            Customer = customer;
             return Page();
         }
 
@@ -49,7 +49,7 @@ namespace MedicineProject.Pages.Admin.Customers
                 return Page();
             }
 
-            _unitOfWork.Customer.Update(Customers);
+            _unitOfWork.Customer.Update(Customer);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

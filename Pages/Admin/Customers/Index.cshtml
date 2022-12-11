@@ -3,10 +3,9 @@
 
 @{
     ViewData["Title"] = "Index";
-
 }
 
-<h1>Customers</h1>
+<h1>Customer</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -15,30 +14,30 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customers[0].FirstName)
+                @Html.DisplayNameFor(model => model.Customer[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customers[0].LastName)
+                @Html.DisplayNameFor(model => model.Customer[0].LastName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Customers)
+        @foreach (var item in Model.Customer)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

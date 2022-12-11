@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +20,7 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
 
-        public Customer Customers{ get; set; }
+      public Customer Customer { get; set; }
 
         public async Task<IActionResult> OnGet(int? id)
         {
@@ -34,9 +34,9 @@ namespace MedicineProject.Pages.Admin.Customers
             {
                 return NotFound();
             }
-            else
+            else 
             {
-                Customers = customer;
+                Customer = customer;
             }
             return Page();
         }
