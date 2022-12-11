@@ -20,13 +20,13 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
 
-        public IList<Customer> Customer { get;set; }
+        public IList<Customer> Customers { get;set; }
 
         public async Task OnGetAsync()
         {
             if (_unitOfWork.Customer != null)
             {
-                Customer = _unitOfWork.Customer.GetAll();
+                Customers = _unitOfWork.Customer.GetAll();
             }
         }
     }

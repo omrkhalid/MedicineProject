@@ -25,7 +25,7 @@ namespace MedicineProject.Pages.Admin.Customers
         }
 
         [BindProperty]
-        public Customer Customer { get; set; }
+        public Customer Customers { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -36,7 +36,7 @@ namespace MedicineProject.Pages.Admin.Customers
                 return Page();
             }
 
-            _unitOfWork.Customer.Add(Customer);
+            _unitOfWork.Customer.Add(Customers);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

@@ -22,7 +22,7 @@ namespace MedicineProject.Pages.Admin.Customers
         }
 
         [BindProperty]
-        public Customer Customer { get; set; } = default!;
+        public Customer Customers { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,7 +36,7 @@ namespace MedicineProject.Pages.Admin.Customers
             {
                 return NotFound();
             }
-            Customer = customer;
+            Customers = customer;
             return Page();
         }
 
@@ -49,7 +49,7 @@ namespace MedicineProject.Pages.Admin.Customers
                 return Page();
             }
 
-            _unitOfWork.Customer.Update(Customer);
+            _unitOfWork.Customer.Update(Customers);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

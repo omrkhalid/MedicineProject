@@ -20,7 +20,7 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
 
-      public Customer Customer { get; set; }
+      public Customer Customers { get; set; }
 
         public async Task<IActionResult> OnGet(int? id)
         {
@@ -36,7 +36,7 @@ namespace MedicineProject.Pages.Admin.Customers
             }
             else 
             {
-                Customer = customer;
+                Customers = customer;
             }
             return Page();
         }

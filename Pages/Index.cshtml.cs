@@ -14,7 +14,7 @@ namespace MedicineProject.Pages
 
         public IActionResult OnGet()
         {
-            return RedirectToPage("Customer/Home/Index");
+            return RedirectToPage("User/Home/Index");
         }
     }
 }

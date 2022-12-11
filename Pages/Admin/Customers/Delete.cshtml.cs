@@ -20,19 +20,19 @@ namespace MedicineProject.Pages.Admin.Customers
             _unitOfWork = unitOfWork;
         }
         [BindProperty]
-      public Customer Customer { get; set; }
+      public Customer Customers { get; set; }
 
         public void OnGet(int id)
         {
-            Customer = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
+            Customers = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var doctor = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == Customer.Id);
+            var doctor = _unitOfWork.Customer.GetFirstOrDefault(m => m.Id == Customers.Id);
             if (doctor != null)
             {
-                _unitOfWork.Customer.Remove(Customer);
+                _unitOfWork.Customer.Remove(Customers);
                 _unitOfWork.Save();
                 TempData["success"] = "sucessfully";
                 return RedirectToPage("./Index");
