@@ -9,7 +9,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Doctors
+namespace MedicineProject.Pages.Categories
 {
     public class DetailsModel : PageModel
     {
@@ -20,23 +20,23 @@ namespace MedicineProject.Pages.Doctors
             _unitOfWork = unitOfWork;
         }
 
-      public Doctor Doctor { get; set; }
+      public Category Categories { get; set; }
 
         public async Task<IActionResult> OnGet(int? id)
         {
-            if (id == null || _unitOfWork.Doctor == null)
+            if (id == null || _unitOfWork.Category == null)
             {
                 return NotFound();
             }
 
-            var doctor = _unitOfWork.Doctor.GetFirstOrDefault(m => m.Id == id);
-            if (doctor == null)
+            var category = _unitOfWork.Category.GetFirstOrDefault(m => m.Id == id);
+            if (category == null)
             {
                 return NotFound();
             }
             else 
             {
-                Doctor = doctor;
+                Categories = category;
             }
             return Page();
         }

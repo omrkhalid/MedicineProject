@@ -1,62 +1,62 @@
 ﻿@page
-@model MedicineProject.Pages.Admin.Clinics.UpsertModel
+@model MedicineProject.Pages.Admin.MenuItems.UpsertModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
 <form method="post" enctype="multipart/form-data">
-    <input asp-for="Clinics.Id" hidden />
+    <input asp-for="MenuItems.Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <div class="col-9">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <h2 class="text-primary pl-3">
-                    @(Model.Clinics.Id != 0 ? "Update" : "Create") Clinic
+                    @(Model.MenuItems.Id != 0 ? "Update" : "Create") MenuItem
                 </h2>
                 <hr />
                 <div class="mb-3">
-                    <label asp-for="Clinics.Name" class="control-label"></label>
-                    <input asp-for="Clinics.Name" class="form-control" />
-                    <span asp-validation-for="Clinics.Name" class="text-danger"></span>
+                    <label asp-for="MenuItems.Name" class="control-label"></label>
+                    <input asp-for="MenuItems.Name" class="form-control" />
+                    <span asp-validation-for="MenuItems.Name" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Clinics.Description" class="control-label"></label>
-                    <input asp-for="Clinics.Description" class="form-control" />
-                    <span asp-validation-for="Clinics.Description" class="text-danger"></span>
+                    <label asp-for="MenuItems.Description" class="control-label"></label>
+                    <input asp-for="MenuItems.Description" class="form-control" />
+                    <span asp-validation-for="MenuItems.Description" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Clinics.Image" class="control-label"></label>
+                    <label asp-for="MenuItems.Image" class="control-label"></label>
                     <input type="file" name="files" id="uploadBox" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Clinics.Price" class="control-label"></label>
-                    <input asp-for="Clinics.Price" class="form-control" />
-                    <span asp-validation-for="Clinics.Price" class="text-danger"></span>
+                    <label asp-for="MenuItems.Price" class="control-label"></label>
+                    <input asp-for="MenuItems.Price" class="form-control" />
+                    <span asp-validation-for="MenuItems.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Clinics.DoctorId" class="control-label"></label>
-                    <select asp-for="Clinics.DoctorId" asp-items="Model.DoctorList" class="form-select">
-                        <option disabled selected>-Select Doctor-</option>
+                    <label asp-for="MenuItems.CategoryId" class="control-label"></label>
+                    <select asp-for="MenuItems.CategoryId" asp-items="Model.DoctorList" class="form-select">
+                        <option disabled selected>-Select Category-</option>
                     </select>
-                    <span asp-validation-for="Clinics.DoctorId" class="text-danger"></span>
+                    <span asp-validation-for="MenuItems.CategoryId" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Clinics.CustomerId" class="control-label"></label>
-                    <select asp-for="Clinics.CustomerId" asp-items="Model.CustomerList" class="form-select">
-                        <option disabled selected>-Select Customer-</option>
+                    <label asp-for="MenuItems.MedicineTypeId" class="control-label"></label>
+                    <select asp-for="MenuItems.MedicineTypeId" asp-items="Model.MedicineTypeList" class="form-select">
+                        <option disabled selected>-Select MedicineType-</option>
                     </select>
-                    <span asp-validation-for="Clinics.CustomerId" class="text-danger"></span>
+                    <span asp-validation-for="MenuItems.MedicineTypeId" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-3">
-                @if (Model.Clinics.Id != 0)
+                @if (Model.MenuItems.Id != 0)
                 {
-                    <img src="@Model.Clinics.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                    <img src="@Model.MenuItems.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
                 }
             </div>
         </div>
-        @if(Model.Clinics.Id != 0)
+        @if (Model.MenuItems.Id != 0)
         {
             <button type="submit" value="Create" class="btn btn-primary" style="width:150px;">Update</button>
         }

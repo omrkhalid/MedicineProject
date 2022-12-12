@@ -1,5 +1,5 @@
 ﻿@page
-@model MedicineProject.Pages.Doctors.EditModel
+@model MedicineProject.Pages.Categories.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,22 +7,22 @@
 
 <h1>Edit</h1>
 
-<h4>Doctor</h4>
+<h4>Category</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Doctor.Id" />
+            <input type="hidden" asp-for="Categories.Id" />
             <div class="form-group">
-                <label asp-for="Doctor.FirstName" class="control-label"></label>
-                <input asp-for="Doctor.FirstName" class="form-control" />
-                <span asp-validation-for="Doctor.FirstName" class="text-danger"></span>
+                <label asp-for="Categories.Name" class="control-label"></label>
+                <input asp-for="Categories.Name" class="form-control" />
+                <span asp-validation-for="Categories.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Doctor.LastName" class="control-label"></label>
-                <input asp-for="Doctor.LastName" class="form-control" />
-                <span asp-validation-for="Doctor.LastName" class="text-danger"></span>
+                <label asp-for="Categories.DisplayOrder" class="control-label"></label>
+                <input asp-for="Categories.DisplayOrder" class="form-control" />
+                <span asp-validation-for="Categories.DisplayOrder" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

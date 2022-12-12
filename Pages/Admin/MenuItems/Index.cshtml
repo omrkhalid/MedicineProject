@@ -1,0 +1,35 @@
+﻿@page
+@model MedicineProject.Pages.Admin.MenuItems.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>MenuItems</h1>
+
+<p>
+    <a asp-page="Upsert">Create New</a>
+</p>
+<table id="DT_load" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuItems[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuItems[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuItems[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuItems[0].MedicineType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts{
+    <script src="~/js/menuitem.js"></script>
+
+}

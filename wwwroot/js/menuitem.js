@@ -2,22 +2,22 @@
 $(document).ready(function () {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/Clinic",
+            "url": "/api/MenuItem",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
             { "data": "name", "width": "25%" },
             { "data": "price", "width": "15%" },
-            { "data": "doctor.firstName", "width": "15%" },
-            { "data": "customer.firstName", "width": "15%" },
+            { "data": "category.name", "width": "15%" },
+            { "data": "medicineType.name", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="w-75 btn-group" >
-                            <a href="/Admin/Clinics/upsert?id=${data}"  class="btn btn-success text-white mx-2">
+                            <a href="/Admin/MenuItems/upsert?id=${data}"  class="btn btn-success text-white mx-2">
                             <i class="bi bi-pencil-square"></i>  </a>
-                            <a onClick=Delete('/api/Clinic/'+${data})  class="btn btn-danger text-white mx-2">
+                            <a onClick=Delete('/api/MenuItem/'+${data})  class="btn btn-danger text-white mx-2">
                              <i class="bi bi-trash-fill"></i>  </a>
                             </div>`
                 },

@@ -9,7 +9,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Doctors
+namespace MedicineProject.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
@@ -20,19 +20,19 @@ namespace MedicineProject.Pages.Doctors
             _unitOfWork = unitOfWork;
         }
         [BindProperty]
-      public Doctor Doctor { get; set; }
+      public Category Categories { get; set; }
 
         public void OnGet(int id)
         {
-           Doctor = _unitOfWork.Doctor.GetFirstOrDefault(m => m.Id == id);
+            Categories = _unitOfWork.Category.GetFirstOrDefault(m => m.Id == id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var doctor = _unitOfWork.Doctor.GetFirstOrDefault(m => m.Id == Doctor.Id);
+            var doctor = _unitOfWork.Category.GetFirstOrDefault(m => m.Id == Categories.Id);
             if (doctor != null)
             {
-                _unitOfWork.Doctor.Remove(doctor);
+                _unitOfWork.Category.Remove(Categories);
                 _unitOfWork.Save();
                 TempData["success"] = "sucessfully";
                 return RedirectToPage("./Index");

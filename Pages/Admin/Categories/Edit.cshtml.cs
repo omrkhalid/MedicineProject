@@ -10,7 +10,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Doctors
+namespace MedicineProject.Pages.Categories
 {
     public class EditModel : PageModel
     {
@@ -22,21 +22,21 @@ namespace MedicineProject.Pages.Doctors
         }
 
         [BindProperty]
-        public Doctor Doctor { get; set; } = default!;
+        public Category Categories { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _unitOfWork.Doctor == null)
+            if (id == null || _unitOfWork.Category == null)
             {
                 return NotFound();
             }
 
-            var doctor =  _unitOfWork.Doctor.GetFirstOrDefault(m => m.Id == id);
-            if (doctor == null)
+            var category =  _unitOfWork.Category.GetFirstOrDefault(m => m.Id == id);
+            if (category == null)
             {
                 return NotFound();
             }
-            Doctor = doctor;
+            Categories = category;
             return Page();
         }
 
@@ -49,7 +49,7 @@ namespace MedicineProject.Pages.Doctors
                 return Page();
             }
 
-            _unitOfWork.Doctor.Update(Doctor);
+            _unitOfWork.Category.Update(Categories);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

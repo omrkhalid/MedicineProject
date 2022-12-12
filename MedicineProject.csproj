@@ -21,11 +21,11 @@
 
   <ItemGroup>
     <Folder Include="Pages\User\Cart\" />
-    <Folder Include="wwwroot\images\clinics\" />
+    <Folder Include="wwwroot\images\menuItems\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\Admin\Clinics\Upsert.cshtml">
+    <Content Update="Pages\Admin\MenuItems\Upsert.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

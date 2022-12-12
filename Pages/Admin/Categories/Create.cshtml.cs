@@ -9,7 +9,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Doctors
+namespace MedicineProject.Pages.Admin.Categories
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace MedicineProject.Pages.Doctors
         }
 
         [BindProperty]
-        public Doctor Doctor { get; set; }
+        public Category Categories { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -36,7 +36,7 @@ namespace MedicineProject.Pages.Doctors
                 return Page();
             }
 
-            _unitOfWork.Doctor.Add(Doctor);
+            _unitOfWork.Category.Add(Categories);
             _unitOfWork.Save();
             TempData["success"] = "sucessfully";
             return RedirectToPage("./Index");

@@ -13,12 +13,12 @@ namespace MedicineProject.Pages.User.Home
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<Clinic> ClinicList { get; set; }
-        public IEnumerable<Doctor> DoctorList { get; set; }
+        public IEnumerable<MenuItem> MenuItemList { get; set; }
+        public IEnumerable<Category> CategoryList { get; set; }
         public void OnGet()
         {
-            ClinicList = _unitOfWork.Clinic.GetAll(includeProperties: "Doctor,Customer");
-            DoctorList = _unitOfWork.Doctor.GetAll();
+            MenuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,MedicineType");
+            CategoryList = _unitOfWork.Category.GetAll(orderby: u=>u.OrderBy(c=>c.DisplayOrder));
         }
     }
 }

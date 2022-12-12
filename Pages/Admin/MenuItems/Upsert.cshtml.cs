@@ -10,7 +10,7 @@ using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 using NuGet.Packaging.Signing;
 
-namespace MedicineProject.Pages.Admin.Clinics
+namespace MedicineProject.Pages.Admin.MenuItems
 {
     [BindProperties]
     public class UpsertModel : PageModel
@@ -20,28 +20,28 @@ namespace MedicineProject.Pages.Admin.Clinics
         public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
-            Clinics = new();
+            MenuItems = new();
             _hostEnvironment = hostEnvironment;
         }
-        public Clinic Clinics { get; set; }
+        public MenuItem MenuItems { get; set; }
         public IEnumerable<SelectListItem> DoctorList { get; set; }
-        public IEnumerable<SelectListItem> CustomerList { get; set; }
+        public IEnumerable<SelectListItem> MedicineTypeList { get; set; }
 
         public void OnGet(int? id)
         {
             if (id != null)
             {
                 //Edit
-                Clinics = _unitOfWork.Clinic.GetFirstOrDefault(u => u.Id == id);
+                MenuItems = _unitOfWork.MenuItem.GetFirstOrDefault(u => u.Id == id);
             }
-            DoctorList = _unitOfWork.Doctor.GetAll().Select(i => new SelectListItem()
+            DoctorList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem()
             {
-                Text = i.FirstName,
+                Text = i.Name,
                 Value = i.Id.ToString()
             });
-            CustomerList = _unitOfWork.Customer.GetAll().Select(i => new SelectListItem()
+            MedicineTypeList = _unitOfWork.MedicineType.GetAll().Select(i => new SelectListItem()
             {
-                Text = i.FirstName,
+                Text = i.Name,
                 Value = i.Id.ToString()
             });
         }
@@ -53,28 +53,28 @@ namespace MedicineProject.Pages.Admin.Clinics
         {
             string webRootPath = _hostEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
-            if (Clinics.Id == 0)
+            if (MenuItems.Id == 0)
             {
                 //create
                 string fileName_new = Guid.NewGuid().ToString();
-                var uploads = Path.Combine(webRootPath, @"images\clinics");
+                var uploads = Path.Combine(webRootPath, @"images\menuItems");
                 var extension = Path.GetExtension(files[0].FileName);
                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName_new + extension), FileMode.Create))
                 {
                     files[0].CopyTo(fileStream);
                 }
-                Clinics.Image = @"\images\clinics\" + fileName_new + extension;
-                _unitOfWork.Clinic.Add(Clinics);
+                MenuItems.Image = @"\images\menuItems\" + fileName_new + extension;
+                _unitOfWork.MenuItem.Add(MenuItems);
                 _unitOfWork.Save();
             }
             else
             {
                 //edit
-                var objFromDb = _unitOfWork.Clinic.GetFirstOrDefault(u => u.Id == Clinics.Id);
+                var objFromDb = _unitOfWork.MenuItem.GetFirstOrDefault(u => u.Id == MenuItems.Id);
                 if (files.Count > 0)
                 {
                     string fileName_new = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"images\clinics");
+                    var uploads = Path.Combine(webRootPath, @"images\menuItems");
                     var extension = Path.GetExtension(files[0].FileName);
 
                     //delet the old image
@@ -88,13 +88,13 @@ namespace MedicineProject.Pages.Admin.Clinics
                     {
                         files[0].CopyTo(fileStream);
                     }
-                    Clinics.Image = @"\images\clinics\" + fileName_new + extension;
+                    MenuItems.Image = @"\images\menuItems\" + fileName_new + extension;
                 }
                 else
                 {
-                    Clinics.Image = objFromDb.Image;
+                    MenuItems.Image = objFromDb.Image;
                 }
-                _unitOfWork.Clinic.Update(Clinics);
+                _unitOfWork.MenuItem.Update(MenuItems);
                 _unitOfWork.Save();
             }
             return RedirectToPage("./Index");

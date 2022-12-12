@@ -9,7 +9,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Doctors
+namespace MedicineProject.Pages.Categories
 {
     public class IndexModel : PageModel
     {
@@ -20,13 +20,13 @@ namespace MedicineProject.Pages.Doctors
             _unitOfWork = unitOfWork;
         }
 
-        public IList<Doctor> Doctor { get;set; }
+        public IList<Category> Categories { get;set; }
 
         public async Task OnGetAsync()
         {
-            if (_unitOfWork.Doctor != null)
+            if (_unitOfWork.Category != null)
             {
-                Doctor = _unitOfWork.Doctor.GetAll();
+                Categories = _unitOfWork.Category.GetAll();
             }
         }
     }

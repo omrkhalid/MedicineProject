@@ -1,11 +1,11 @@
 ﻿@page
-@model MedicineProject.Pages.Doctors.IndexModel
+@model MedicineProject.Pages.Categories.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Doctors</h1>
+<h1>Categories</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,22 +14,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Doctor[0].FirstName)
+                @Html.DisplayNameFor(model => model.Categories[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Doctor[0].LastName)
+                @Html.DisplayNameFor(model => model.Categories[0].DisplayOrder)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Doctor) {
+        @foreach (var item in Model.Categories)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.DisplayOrder)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

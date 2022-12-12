@@ -9,7 +9,7 @@ using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
 
-namespace MedicineProject.Pages.Admin.Clinics
+namespace MedicineProject.Pages.Admin.MenuItems
 {
     public class IndexModel : PageModel
     {
@@ -20,11 +20,11 @@ namespace MedicineProject.Pages.Admin.Clinics
             _unitOfWork = unitOfWork;
         }
 
-        public IList<Clinic> Clinics { get; set; }
+        public IList<MenuItem> MenuItems { get; set; }
 
         public void OnGet()
         {
-            Clinics = _unitOfWork.Clinic.GetAll();
+            MenuItems = _unitOfWork.MenuItem.GetAll();
         }
     }
 }
