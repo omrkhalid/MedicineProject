@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MedicineProject.Data;
 using MedicineProject.Models;
 using MedicineProject.DataAccess.Repository.IRepository;
-using NuGet.Packaging.Signing;
 
 namespace MedicineProject.Pages.Admin.MenuItems
 {
