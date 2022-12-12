@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MedicineProject.Data;
 using MedicineProject.DataAccess.Repository;
 using MedicineProject.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MedicineProjectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MedicineProjectContext") ?? throw new InvalidOperationException("Connection string 'MedicineProjectContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<MedicineProjectContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
@@ -27,7 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
