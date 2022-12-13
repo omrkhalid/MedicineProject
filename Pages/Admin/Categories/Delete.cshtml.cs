@@ -29,13 +29,17 @@ namespace MedicineProject.Pages.Categories
 
         public async Task<IActionResult> OnPost()
         {
-            var doctor = _unitOfWork.Category.GetFirstOrDefault(m => m.Id == Categories.Id);
-            if (doctor != null)
+            var category = _unitOfWork.Category.GetFirstOrDefault(m => m.Id == Categories.Id);
+            if (category != null)
             {
+                Categories = category;
                 _unitOfWork.Category.Remove(Categories);
                 _unitOfWork.Save();
-                TempData["success"] = "sucessfully";
                 return RedirectToPage("./Index");
+                //_unitOfWork.Category.Remove(Categories);
+                //_unitOfWork.Save();
+                // TempData["success"] = "sucessfully";
+                //return RedirectToPage("./Index");
             }
             return Page();
         }
