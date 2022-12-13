@@ -4,6 +4,8 @@ using MedicineProject.Data;
 using MedicineProject.DataAccess.Repository;
 using MedicineProject.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using MedicineProject.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,15 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MedicineProjectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MedicineProjectContext") ?? throw new InvalidOperationException("Connection string 'MedicineProjectContext' not found.")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<MedicineProjectContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MedicineProjectContext>().AddDefaultTokenProviders();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AcessDenied";
+});
 
 var app = builder.Build();
 
