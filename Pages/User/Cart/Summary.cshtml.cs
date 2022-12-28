@@ -75,44 +75,55 @@ namespace MedicineProject.Pages.User.Cart
                     _unitOfWork.OrderDetails.Add(orderDetails);
                     
                 }
-                int quantity = ShoppingCartList.ToList().Count;
-                _unitOfWork.ShoppingCart.RemoveRange(ShoppingCartList);
+                
+                //_unitOfWork.ShoppingCart.RemoveRange(ShoppingCartList);
                 _unitOfWork.Save();
 
 
                 var domain = "https://localhost:44308/";
                 var options = new SessionCreateOptions
                 {
-                    LineItems = new List<SessionLineItemOptions>
-                {
-                  new SessionLineItemOptions
-                  {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        UnitAmount= (long)(OrderHeader.OrderTotal*100),
-                        Currency="usd",
-                        ProductData= new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "Medicine Order",
-                            Description = "Total Distinct Item -"+quantity
-                        },
-                    },
-                    Quantity = 1
-                  },
-                },
+                    LineItems = new List<SessionLineItemOptions>()
+                ,
                     PaymentMethodTypes = new List<string>
                     {
                         "card",
                     },
 
                     Mode = "payment",
-                    SuccessUrl = domain + $"/user/cart/OrderConfirmation?id={OrderHeader.Id}",
-                    CancelUrl = domain + "/user/cart/index",
+                    SuccessUrl = domain + $"User/Cart/OrderConfirmation?id={OrderHeader.Id}",
+                    CancelUrl = domain + "User/Cart/Index",
                 };
+
+                // add line items
+                foreach(var item in ShoppingCartList) 
+                {
+                    var sessionLineItem = new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmount = (long)(item.MenuItem.Price * 100),
+                            Currency = "usd",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = item.MenuItem.Name
+                            },
+                        },
+                        Quantity = item.Count
+                    };
+                    options.LineItems.Add(sessionLineItem);
+                }
+                
+
+
                 var service = new SessionService();
                Session session = service.Create(options);
 
                 Response.Headers.Add("Location", session.Url);
+
+                OrderHeader.SessionId= session.Id;
+                OrderHeader.PaymentIntentId = session.PaymentIntentId;
+                _unitOfWork.Save();
                 return new StatusCodeResult(303);
             }
             return Page();
