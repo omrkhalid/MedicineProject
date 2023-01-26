@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using MedicineProject.Utility;
 
 namespace MedicineProject.Controllers
 {
@@ -17,9 +19,12 @@ namespace MedicineProject.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult Get()
+        public IActionResult Get(string? status=null)
         {
             var OrderHeaderList = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser");
+            
+            
+
             return Json(new {data = OrderHeaderList });
         }
     }
